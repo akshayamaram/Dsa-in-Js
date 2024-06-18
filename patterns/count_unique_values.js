@@ -4,7 +4,7 @@
  * but it will always be sorted.
  */
 
-/** Solution :  (multiple pointers approach) , TC - O(n), SC - O(1) */
+/** Solution :  (multiple pointers approach) , TC - O(n) */
 
 function countUniqueValues(arr) {
     if (arr.length === 0) return 0;

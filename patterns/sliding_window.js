@@ -12,24 +12,47 @@
  * called n, The funciton should calculate the maximum sum of n consecutive elements in the array.
  */
 
-/** Solution : 1 (normal approach) , TC - O(n^2), SC - O(1) */
+/** Solution : 1 (normal approach) , TC - O(n^2) */
 
-function maxSubarraySum(arr, n) {
+function maxSubarraySum1(arr, n) {
     if (n > arr.length) return null
-    let maxSum = -Infinity
-    for (let i = 0; i < arr.length - n + 1; i++) {
+    let maxSum = - Infinity
+    for(let i = 0; i < arr.length - n + 1; i++) {
         let sum = 0
-        for (let j = i; j < i + n; j++) {
-            sum += arr[j]
+        for(let j = 0; j < n; j++) {
+            sum = sum + arr[i + j]
         }
-        if (sum > maxSum) maxSum = sum
+        if(sum > maxSum) maxSum = sum
+        // console.log(sum, maxSum)
     }
     return maxSum
 }
 
+console.log(maxSubarraySum1([1, 2, 5, 2, 8, 1, 5], 2)) // 10
+console.log(maxSubarraySum1([1, 2, 5, 2, 8, 1, 5], 4)) // 17
+console.log(maxSubarraySum1([], 3)) // null
+console.log(maxSubarraySum1([4, 2, 1, 6], 1)) // 6
 
 
-console.log(maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 2)) // 10
-console.log(maxSubarraySum([1, 2, 5, 2, 8, 1, 5], 4)) // 17
-console.log(maxSubarraySum([], 3)) // null
-console.log(maxSubarraySum([4, 2, 1, 6], 1)) // 6
+/** Solution : 2 (sliding window approach) , TC - O(n)*/
+
+function maxSubarraySum2(arr, n) {
+    if (n > arr.length) return null
+    let maxSum = 0;
+    let tempSum = 0;
+    for (let i = 0; i < n; i++) {
+        maxSum += arr[i];
+    }
+    tempSum = maxSum;
+    for (let i = n; i < arr.length; i++) {
+        tempSum = tempSum - arr[i - n] + arr[i];
+        maxSum = Math.max(maxSum, tempSum);
+    }
+    return maxSum
+}
+
+console.log('-------------')
+console.log(maxSubarraySum2([1, 2, 5, 2, 8, 1, 5], 2)) // 10
+console.log(maxSubarraySum2([1, 2, 5, 2, 8, 1, 5], 4)) // 17
+console.log(maxSubarraySum2([], 3)) // null
+console.log(maxSubarraySum2([4, 2, 1, 6], 1)) // 6
