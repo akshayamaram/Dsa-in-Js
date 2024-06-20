@@ -22,6 +22,7 @@ function same1(arr1, arr2) {
 console.log(same1([1, 2, 3, 2], [9, 1, 4, 4])); // true
 console.log(same1([1, 2, 3, 2, 5], [9, 1, 4, 4, 11])); // false
 
+
 /** Solution : 2 (frequency counter pattern approach) O(n) */
 
 function same2(arr1, arr2) {
